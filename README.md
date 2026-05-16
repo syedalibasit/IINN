@@ -1,4 +1,4 @@
-# IINN: Innately Intelligent Neural Networks for Traceable and Robust Wireless Propagation Modelling
+# IINN: Innately Intelligent Neural Networks for Interpretable and Robust Wireless Propagation Modelling
 
 This repository provides the dataset, code, results, and supplementary visual diagnostics supporting the paper **"IINN: Innately Intelligent Neural Networks for Traceable and Robust Wireless Propagation Modelling"**.
 
