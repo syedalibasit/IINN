@@ -1,70 +1,65 @@
-# IINN: Innately Intelligent Neural Networks for Interpretable and Robust Wireless Propagation Modelling
+# IINN: Innately Intelligent Neural Networks for Traceable and Robust Wireless Propagation Modelling
 
-This repository provides the dataset, code, results, and supplementary visual diagnostics supporting the paper **"IINN: Innately Intelligent Neural Networks for Traceable and Robust Wireless Propagation Modelling"**.
+This repository contains the data, code, figures, and result artifacts supporting the paper **"IINN: Innately Intelligent Neural Networks for Traceable and Robust Wireless Propagation Modelling"**.
 
-The main paper keeps the network-simulation section concise. Additional figures for Section 03 are provided here so readers can visually inspect the simulation environment, urban morphology shift, terrain effects, and physical consistency of the generated RSRP data.
+The manuscript keeps the network-simulation section concise and self-contained. This repository provides the additional visual diagnostics, raw Atoll exports, implementation files, and ablation outputs needed to inspect the simulation setting and reproduce the reported evidence.
 
-## Repository Guide
+## Repository Structure
 
-| Folder | Description |
+| Path | Contents |
 |---|---|
-| `data/` | Processed wireless propagation datasets and metadata used for model training and evaluation. |
-| `figures/section03_network_simulation/` | Supplementary visual diagnostics for Section 03 of the paper. |
-| `code/` | Scripts for preprocessing, visualization, model training, and evaluation. |
-| `results/` | Performance tables, ablation outputs, and generated result artifacts. |
-
-## How This Repository Supports Section 03
-
-| Paper topic | Repository location | Purpose |
-|---|---|---|
-| Simulation settings | `data/metadata/` | Documents city, frequency, antenna, deployment, and propagation settings. |
-| Dataset variables | `data/metadata/` | Defines features used for RSRP prediction and their physical meaning. |
-| 3D deployment maps | `figures/section03_network_simulation/deployment_maps/` | Shows Brussels and Chicago simulation tiles, gNodeB placement, and UE distribution. |
-| Urban morphology shift | `figures/section03_network_simulation/clutter_distributions/` | Shows clutter-class differences between Brussels and Chicago. |
-| Terrain and obstruction profiles | `figures/section03_network_simulation/terrain_profiles/` | Shows example link profiles illustrating terrain and clutter effects. |
-| RSRP-distance consistency | `figures/section03_network_simulation/rsrp_distance_profiles/` | Shows sector-wise RSRP trends versus transmitter--receiver distance. |
-
-## Dataset Summary
-
-The datasets were generated using Atoll by Forsk for 5G NR macrocell deployments in Brussels, Belgium and Chicago, USA. Each city contains five macrocell sites, three sectors per site, and a 1 km² urban simulation tile. The prediction target is reference signal received power (RSRP).
-
-The input variables include network configuration, transmitter--receiver geometry, antenna parameters, carrier frequency, height-related variables, and environmental descriptors. These variables are selected because they correspond to propagation-relevant factors used in analytical radio models and radio-planning workflows.
-
-The datasets support evaluation under:
-
-- city shift,
-- frequency shift,
-- restricted training data,
-- label noise and imbalance,
-- cross-propagation transfer.
-
-## Supplementary Visual Diagnostics
-
-The paper retains the simulation settings and dataset description required for a self-contained evaluation. The following supplementary figures are provided here for visual transparency:
-
-1. `deployment_maps/` shows the 3D urban simulation regions and deployment layout.
-2. `clutter_distributions/` shows morphology differences between Brussels and Chicago.
-3. `rsrp_distance_profiles/` checks that RSRP follows physically plausible distance-dependent trends.
-4. `terrain_profiles/` illustrates local obstruction and clutter effects along selected links.
-
-These figures are not required to reproduce the experiments, but they help readers interpret the simulation scenario and the sources of domain shift.
+| `data/processed/` | Cleaned tabular RSRP dataset used for model training and evaluation. |
+| `data/raw/atoll_generated/` | Raw Atoll-generated spreadsheets for Brussels, Chicago, frequency-shift, and propagation-model-transfer settings. |
+| `data/raw/transmitter_settings/` | Transmitter configuration spreadsheets for the simulated deployments. |
+| `data/metadata/` | Simulation settings, feature dictionary, feature-group description, and split definitions. |
+| `code/original_equation_wired_iinn/` | Original equation-wired IINN implementation used to expose the cross-propagation alignment issue. |
+| `code/generalized_physics_iinn/` | Updated white-box/generalized Physics-IINN code used for corrected 3GPP-to-SPM transfer analysis. |
+| `figures/section03_network_simulation/` | Supplementary figures for the simulation setting: deployment maps, clutter distributions, terrain profiles, and RSRP-distance diagnostics. |
+| `figures/model_architecture/` | Full internal IINN computation graph moved from the paper to the repository. |
+| `figures/performance_evaluation/` | Spatial ground-truth/prediction comparisons for selected in-domain and OOD experiments. |
+| `results/figures/` | Paper-level result figures for performance evaluation and ablation analysis. |
+| `results/cross_propagation/` | Detailed metrics, predictions, calibration outputs, and component decompositions for 3GPP-to-SPM transfer. |
 
 ## Recommended Reading Path
 
-Readers who want to inspect the dataset visually should start with:
+For readers checking the simulation setup:
 
-1. `figures/section03_network_simulation/README.md`
-2. `figures/section03_network_simulation/deployment_maps/`
-3. `figures/section03_network_simulation/clutter_distributions/`
-4. `figures/section03_network_simulation/rsrp_distance_profiles/`
-5. `figures/section03_network_simulation/terrain_profiles/`
+1. Start with `data/metadata/simulation_settings.csv`.
+2. Read `data/metadata/feature_description.md` and `data/metadata/data_dictionary.csv`.
+3. Inspect `figures/section03_network_simulation/README.md`.
+4. Use the subfolder guides under `deployment_maps/`, `clutter_distributions/`, `terrain_profiles/`, and `rsrp_distance_profiles/` for figure-by-figure interpretation.
 
-Readers who want to reproduce experiments should start with:
+For readers checking the IINN implementation and ablation:
 
-1. `data/README.md`
-2. `data/metadata/`
-3. `code/README.md`
-4. `results/README.md`
+1. Read `code/README.md`.
+2. Compare `code/original_equation_wired_iinn/` and `code/generalized_physics_iinn/`.
+3. Inspect `figures/model_architecture/` for the full equation-wired computation graph.
+4. Review `results/cross_propagation/README.md` for corrected 3GPP-to-SPM evaluation.
+
+## Dataset Summary
+
+The data were generated in Atoll by Forsk for 5G NR macrocell deployments in Brussels, Belgium, and Chicago, USA. Each city uses five macrocell sites, three sectors per site, and a 1 km^2 urban simulation tile. The prediction target is reference signal received power (RSRP).
+
+The processed CSV contains 20,390 labelled RSRP samples and includes network configuration, transmitter-receiver geometry, antenna parameters, carrier frequency, height-related variables, and clutter/environment descriptors. These inputs correspond to propagation-relevant factors used in analytical radio models and practical radio-planning workflows.
+
+The repository supports evaluation under in-domain testing, restricted training data, label noise, imbalance, city shift, frequency shift, joint city-frequency shift, and cross-propagation transfer.
+
+## Result Anchors
+
+The following values are included to help readers connect the repository artifacts to the manuscript:
+
+| Setting | Key result |
+|---|---|
+| Full-data city shift | IINN reports the lowest OOD degradation of 16.80%, compared with 30.88% for DNN and 37.84-48.68% for tree-based baselines. |
+| Joint city-frequency shift | IINN reports RMSE = 11.04 dB, MAE = 8.77 dB, and OOD degradation = 23.20%. |
+| Original equation-wired 3GPP-to-SPM transfer | OOD RMSE = 54.21 dB and MBE = +53.08 dB, indicating systematic alignment bias. |
+| Updated white-box Physics-IINN 3GPP-to-SPM transfer | Calibrated OOD RMSE = 10.017 dB and MBE = -0.330 dB in the uploaded run artifacts. |
+
+## How to Use This Repository
+
+The raw spreadsheets preserve the Atoll export structure. The processed CSV is intended for direct model training and evaluation. The code files are grouped by purpose so the original equation-wired implementation and the updated cross-propagation implementation can be inspected separately.
+
+Some scripts contain local paths from the original experiment machine. Before rerunning experiments, update dataset paths to the corresponding files under `data/raw/` or `data/processed/`.
 
 ## Citation
 

@@ -1,0 +1,106 @@
+{
+  "model": "WhiteBox_Physics_IINN",
+  "formula": "RSRP = C + T(Ptx) - L(d,f) + G_ant + H_site + C_clutter + R_small",
+  "train_dataset": "C:\\Users\\2687492Z\\IINN-Rebuttal\\Dataset_File_with_IINN\\3.3Ghz_Bruselles_Data.xlsx",
+  "spm_dataset": "C:\\Users\\2687492Z\\IINN-Rebuttal\\Dataset_File_with_IINN\\3.3Ghz_Brussels_AlternativePropagation.xlsx",
+  "train_rows": 12205,
+  "validation_rows": 2616,
+  "iid_rows": 2616,
+  "spm_calibration_rows": 2433,
+  "spm_eval_rows": 21901,
+  "ensemble_seeds": [
+    42,
+    7,
+    123
+  ],
+  "calibrator": {
+    "slope": 1.1290083608270116,
+    "intercept": 13.149929504778461
+  },
+  "target_mean": -76.42054748535156,
+  "target_std": 10.141211556030273,
+  "train_seconds": 172.34894090000307,
+  "IID_3GPP": {
+    "RMSE_dB": 7.3171868324279785,
+    "MAE_dB": 5.773691177368164,
+    "MBE_dB": 0.06675291061401367,
+    "R2": 0.44769430604416505
+  },
+  "SPM_OOD_uncalibrated": {
+    "RMSE_dB": 11.214218139648438,
+    "MAE_dB": 8.984594345092773,
+    "MBE_dB": -4.956985950469971,
+    "R2": 0.2960534134716022
+  },
+  "SPM_OOD_calibrated": {
+    "RMSE_dB": 10.01743221282959,
+    "MAE_dB": 7.565301895141602,
+    "MBE_dB": -0.329963743686676,
+    "R2": 0.4382868707047105
+  },
+  "OOD_degradation_uncalibrated_percent": 53.2586005587526,
+  "OOD_degradation_calibrated_percent": 36.90278029303264,
+  "metadata": {
+    "scalar_columns": [
+      "Max_Transmitter_Power",
+      "log10_d3d",
+      "log10_d2d",
+      "log10_frequency",
+      "azimuth_error_over_hbw",
+      "tilt_error_over_vbw",
+      "Vertical_Attenuation",
+      "Horizontal_Attenuation",
+      "height_difference_m",
+      "height_ratio",
+      "building_clearance_m",
+      "log10_street_width",
+      "Efficiency"
+    ],
+    "clutter_categories": [
+      "0 - ?",
+      "1 - open",
+      "11 - open_in_urban",
+      "12 - parks_in_urban",
+      "15 - dense_residential",
+      "19 - high_buildings",
+      "20 - low_vegetation",
+      "22 - grass",
+      "4 - inland_water",
+      "5 - residential",
+      "6 - urban",
+      "7 - dense_urban",
+      "8 - block_of_buildings",
+      "9 - commercial_industrial"
+    ],
+    "feature_columns": [
+      "Max_Transmitter_Power",
+      "log10_d3d",
+      "log10_d2d",
+      "log10_frequency",
+      "azimuth_error_over_hbw",
+      "tilt_error_over_vbw",
+      "Vertical_Attenuation",
+      "Horizontal_Attenuation",
+      "height_difference_m",
+      "height_ratio",
+      "building_clearance_m",
+      "log10_street_width",
+      "Efficiency",
+      "clutter=0 - ?",
+      "clutter=1 - open",
+      "clutter=11 - open_in_urban",
+      "clutter=12 - parks_in_urban",
+      "clutter=15 - dense_residential",
+      "clutter=19 - high_buildings",
+      "clutter=20 - low_vegetation",
+      "clutter=22 - grass",
+      "clutter=4 - inland_water",
+      "clutter=5 - residential",
+      "clutter=6 - urban",
+      "clutter=7 - dense_urban",
+      "clutter=8 - block_of_buildings",
+      "clutter=9 - commercial_industrial",
+      "clutter=UNKNOWN"
+    ]
+  }
+}

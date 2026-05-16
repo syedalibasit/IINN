@@ -1,18 +1,14 @@
 # Deployment Maps
 
-This folder contains 3D deployment maps for the simulated Brussels and Chicago scenarios.
+These figures show the 3D urban map samples and the simulated radio deployment used for data generation.
 
-## Purpose
+| File | Description | Interpretation |
+|---|---|---|
+| `brussels_3p7ghz_deployment_map.png` | Brussels 3.7 GHz 3D map sample with simulated gNodeB deployment and UE distribution. | Shows a dense urban tile with building structures, sectorized sites, and UE placement. This supports the paper's claim that the dataset reflects a realistic urban propagation scenario rather than a synthetic point-cloud exercise. |
+| `chicago_3p3ghz_deployment_map.png` | Chicago 3.3 GHz 3D map sample with simulated gNodeB deployment and UE distribution. | Provides the target-city deployment used for city-shift evaluation. The morphology differs from Brussels, making cross-city transfer a meaningful OOD setting. |
 
-The deployment maps show the urban simulation tiles, gNodeB locations, sectorized deployments, and UE sample distributions. They help readers visually verify that the datasets correspond to realistic urban radio-planning scenarios rather than abstract synthetic examples.
+## Analysis
 
-## Suggested Files
+The maps are useful for visually checking site placement, sector coverage, and UE distribution before interpreting the tabular learning results. They also explain why city transfer is difficult: the model is not only seeing different coordinates, but also a different built environment, clutter mix, antenna geometry, and local obstruction pattern.
 
-| File | Description |
-|---|---|
-| `brussels_deployment_map.png` | Brussels 3D map with simulated gNodeB deployment and UE distribution. |
-| `chicago_deployment_map.png` | Chicago 3D map with simulated gNodeB deployment and UE distribution. |
-
-## Interpretation
-
-These maps support the simulation description in Section 03. They are supplementary because the main paper already reports the essential scenario parameters in the simulation settings table.
+These figures are kept in the repository rather than the main paper because the simulation settings table already provides the reproducible parameters, while the maps mainly provide visual auditability.

@@ -1,39 +1,38 @@
 # Data
 
-This folder contains the processed wireless propagation datasets and metadata used in the IINN experiments.
+This folder contains the processed dataset, raw Atoll exports, transmitter settings, and metadata used in the IINN experiments.
 
-## Expected Structure
+## Folder Layout
 
 | Path | Description |
 |---|---|
-| `processed/` | Cleaned tabular datasets used for model training and evaluation. |
-| `splits/` | Train/test splits for in-domain, city-shift, frequency-shift, restricted-training-data, and cross-propagation experiments. |
-| `metadata/` | Data dictionary, simulation settings, feature descriptions, and label-generation notes. |
+| `processed/iinn_rsrp_dataset.csv` | Cleaned supervised-learning dataset used for RSRP prediction. |
+| `raw/atoll_generated/` | Raw Atoll spreadsheets for Brussels, Chicago, frequency-shift, and 3GPP-to-SPM transfer cases. |
+| `raw/transmitter_settings/` | Transmitter configuration files for the simulated gNodeB deployments. |
+| `metadata/data_dictionary.csv` | Column-level description of the processed dataset. |
+| `metadata/simulation_settings.csv` | Radio, geographic, antenna, and propagation settings used for data generation. |
+| `metadata/feature_description.md` | Human-readable description of the physical feature groups. |
+| `metadata/splits_description.md` | Definition of in-domain, OOD, restricted-data, and cross-propagation splits. |
 
-## Dataset Description
+## Processed Dataset
 
-The datasets were generated using Atoll by Forsk for 5G NR macrocell deployments in Brussels and Chicago. Each deployment uses five macrocell sites, three sectors per site, and a 1 km² urban simulation tile.
-
-The prediction target is RSRP. The main feature groups are:
+`processed/iinn_rsrp_dataset.csv` contains 20,390 labelled samples. The target variable is RSRP. The main feature groups are:
 
 - network configuration,
-- transmitter--receiver geometry,
-- antenna parameters,
+- transmitter-receiver geometry,
+- antenna orientation and beamwidth parameters,
 - carrier frequency,
-- height-related variables,
+- transmitter and user-equipment height variables,
 - clutter and environmental descriptors.
 
-## Recommended Metadata Files
+The processed file is suitable for model development because it aligns the radio, geometry, antenna, environment, and RSRP fields in one table.
 
-The `metadata/` folder should include:
+## Raw Data
 
-| File | Purpose |
-|---|---|
-| `simulation_settings.csv` | Radio, geographic, antenna, and propagation settings used for data generation. |
-| `data_dictionary.csv` | Column-level description of every feature and target variable. |
-| `feature_description.md` | Human-readable explanation of feature groups and physical meaning. |
-| `splits_description.md` | Explanation of train/test splits used in each experiment. |
+The raw spreadsheets are retained for transparency and reproducibility. They include Brussels and Chicago Atoll exports at different carrier frequencies, the alternative propagation-label dataset used for SPM transfer, clutter-distribution summaries, and transmitter-configuration files.
 
-## Notes for Readers
+Readers who only want to reproduce the reported model comparisons can start from `processed/iinn_rsrp_dataset.csv`. Readers who want to audit how the processed dataset relates to the original simulation exports should inspect `raw/atoll_generated/` and `raw/transmitter_settings/`.
 
-The datasets are intended to support reproducibility of the experiments reported in the paper. Supplementary visual diagnostics for the simulation environment are available in `figures/section03_network_simulation/`.
+## Notes
+
+The paper keeps only the essential simulation settings in the main text. Additional visual checks of the data-generation environment are provided under `figures/section03_network_simulation/`.

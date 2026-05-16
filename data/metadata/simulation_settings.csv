@@ -1,0 +1,23 @@
+Configuration,Parameter,Value
+System,Radio access technology,5G NR
+System,Cell layout,5 macrocell sites per city
+System,Sectors per site,3
+System,Carrier frequencies,"3300 MHz, 3500 MHz, 3700 MHz"
+System,Channel bandwidth,10 MHz
+Geographic,Simulation locations,"Brussels, Belgium; Chicago, USA"
+Geographic,Simulation area,1 km^2 per city tile
+Geographic,Map resolution,1 m 3D urban map samples
+Geographic,Propagation matrix resolution,5 m
+Geographic,UE distribution,Poisson distribution
+Geographic,Average building height,20 m
+Geographic,Average street width,20 m
+Propagation,Primary propagation-label model,3GPP TR 38.900 Urban Macro
+Propagation,Cross-propagation transfer label model,Standard Propagation Model
+gNodeB,Antenna model,3GPP antenna radiation pattern
+gNodeB,Antenna height,20-37 m
+gNodeB,Downtilt,0-6 degrees
+gNodeB,Azimuth,"0 degrees, 120 degrees, 240 degrees"
+gNodeB,Antenna gain,8 dBi
+gNodeB,Horizontal half-power beamwidth,65 degrees
+gNodeB,Vertical half-power beamwidth,6 degrees
+gNodeB,Transmit power,50 dBm
